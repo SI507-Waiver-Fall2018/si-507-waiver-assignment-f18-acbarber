@@ -26,7 +26,7 @@ labels=[]
 for pair in data_list_n[1:]:
     labels.append(pair[0])
 
-layout= go.Layout(title='Top 5 Nouns for realDonaldTrump Past 25 tweets', xaxis=dict(title='Most Common Nouns'), yaxis=dict(title='Number of Occurences'))
+layout= go.Layout(title='Top 5 Nouns', xaxis=dict(title='Noun'), yaxis=dict(title='Number of Occurences'))
 
 bar_chart=[go.Bar(x=labels, y=numbers)]
 

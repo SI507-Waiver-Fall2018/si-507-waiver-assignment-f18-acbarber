@@ -17,9 +17,7 @@ content=page.content
 
 soup=BeautifulSoup(content, 'html.parser')
 
-find_a=soup.find_all('a', href = True)
-
-top_articles=find_a[18:23]
+top_articles=soup.find('div', {'class':"view view-most-read view-id-most_read view-display-id-panel_pane_1 view-dom-id-99658157999dd0ac5aa62c2b284dd266"}).find_all('a')
 
 print('Michigan Daily -- MOST READ')
 

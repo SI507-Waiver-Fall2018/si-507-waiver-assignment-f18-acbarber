@@ -53,7 +53,7 @@ def part1(user, tweet_number):
     verbs= {}
     for tuple in texts_all:
         if "VB" in tuple[1] and 'RT' not in tuple[0] and 'http' not in tuple[0] and '//' not in tuple[0] and '@' not in tuple[0] and tuple[0][0] in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' and tuple[0] not in verbs:
-        #I know you can use .isaplha() but this makes the for loops easy to find 
+        #I know you can use .isaplha() but this makes the for loops easy to find
             verbs[tuple[0]]=1
         elif "VB" in tuple[1] and 'RT' not in tuple[0] and 'http' not in tuple[0] and '//' not in tuple[0] and '@' not in tuple[0] and tuple[0][0] in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ':
             verbs[tuple[0]] = verbs[tuple[0]] +1
@@ -88,9 +88,9 @@ def part1(user, tweet_number):
         if retweet == False:
             retweets = retweets + tweet._json['retweet_count']
     noun_data=open('noun_data.csv','w')
-    noun_data.write('Noun,Number\n{},{}\n{},{}\n{},{}\n{},{}\n{},{}'.format(five_nouns[0][0],five_nouns[0][1],five_nouns[1][0],five_nouns[1][1],five_nouns[2][0],five_nouns[2][1],five_nouns[3][0],five_nouns[3][1],five_nouns[4][0],five_nouns[4][1]))
+    writ=noun_data.write('Noun,Number\n{},{}\n{},{}\n{},{}\n{},{}\n{},{}'.format(five_nouns[0][0],five_nouns[0][1],five_nouns[1][0],five_nouns[1][1],five_nouns[2][0],five_nouns[2][1],five_nouns[3][0],five_nouns[3][1],five_nouns[4][0],five_nouns[4][1]))
     noun_data.close()
-    output='\nUSER:{}\nTWEETS ANALYZED:{}\nVERBS:{}\nNOUNS:{}\nADJECTIVES:{}\nORIGINAL TWEETS:{}\nTIMES FAVORITED (ORIGINAL TWEETS ONLY): {}\nTIMES RETWEETED (ORIGINAL TWEETS ONLY): {}'.format(user,tweet_number,common_words(five_verbs),common_words(five_nouns),common_words(five_adjectives),original_count,favorites,retweets)
+    output='USER:{}\nTWEETS ANALYZED:{}\nVERBS:{}\nNOUNS:{}\nADJECTIVES:{}\nORIGINAL TWEETS:{}\nTIMES FAVORITED (ORIGINAL TWEETS ONLY): {}\nTIMES RETWEETED (ORIGINAL TWEETS ONLY): {}'.format(user,tweet_number,common_words(five_verbs),common_words(five_nouns),common_words(five_adjectives),original_count,favorites,retweets)
     return print(output)
 
 if __name__=="__main__":

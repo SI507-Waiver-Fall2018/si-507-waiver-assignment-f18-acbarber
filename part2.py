@@ -6,29 +6,43 @@ data = sqlite3.connect('Northwind_small.sqlite')
 d = data.cursor()
 
 
-def customers():
-    d.execute('SELECT Id, CompanyName FROM Customer')
-    customer_list=d.fetchall()
-    print ('ID      Customer Name')
-    for pair in customer_list:
-        print(pair[0]+'    '+pair[1])
-    return None
 
-def employees():
-    d.execute('SELECT ID, FirstName, LastName FROM [Employee]')
-    employee_list=d.fetchall()
-    print('ID    Employee Name')
-    for tup in employee_list:
-        print(tup[0],'   ', tup[1], tup[2])
-    return None
 
-def orders(cust='o.CustomerId', emp='e.LastName'):
-    d.execute('SELECT o.OrderDate FROM [Order] as o, [Employee] as e WHERE o.EmployeeId=e.Id AND o.CustomerId = ? OR e.LastName = ?;', (cust,emp))
-    order_dates=d.fetchall()
-    print('Order Dates')
-    for date in order_dates:
-        print(date[0])
-    return None
+try:
+    if sys.argv[2][0:4]=='cust':
+        def orders(cust):
+            d.execute('SELECT Distinct o.OrderDate FROM [Order] as o, [Employee] as e WHERE o.EmployeeId=e.Id AND  o.CustomerId=?;', (cust,))
+            order_dates=d.fetchall()
+            print('Order Dates')
+            for date in order_dates:
+                print(date[0])
+            return None
+    elif sys.argv[2][0:3]=='emp':
+        def orders(emp):
+            d.execute('SELECT Distinct o.OrderDate FROM [Order] as o, [Employee] as e WHERE o.EmployeeId=e.Id AND e.LastName =?;', (emp,))
+            order_dates=d.fetchall()
+            print('Order Dates')
+            for date in order_dates:
+                print(date[0])
+            return None
+except IndexError:
+    def customers():
+        d.execute('SELECT Id, CompanyName FROM Customer')
+        customer_list=d.fetchall()
+        print ('ID      Customer Name')
+        for pair in customer_list:
+            print(pair[0]+'    '+pair[1])
+        return None
+
+    def employees():
+        d.execute('SELECT ID, FirstName, LastName FROM [Employee]')
+        employee_list=d.fetchall()
+        print('ID    Employee Name')
+        for tup in employee_list:
+            print(tup[0],'   ', tup[1], tup[2])
+        return None
+
+
 
 
 
